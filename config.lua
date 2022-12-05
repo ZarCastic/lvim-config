@@ -34,6 +34,11 @@ lvim.keys.normal_mode["<leader>P"] = '"+P'
 lvim.keys.normal_mode["<leader>sp"] = ":sp<cr>"
 lvim.keys.normal_mode["<leader>vs"] = ":vs<cr>"
 
+lvim.keys.normal_mode["<C-P>"] = "<cmd>Telescope find_files hidden=true<cr>"
+lvim.keys.normal_mode["<C-F>"] = "<cmd>Telescope live_grep<cr>"
+lvim.keys.normal_mode["<C-B>"] = "<cmd>Telescope buffers<cr>"
+lvim.keys.normal_mode["<C-A>"] = "<cmd>Telescope marks<cr>"
+
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
