@@ -92,6 +92,7 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
   "c",
+  "cpp",
   "javascript",
   "json",
   "lua",
