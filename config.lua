@@ -184,12 +184,55 @@ lvim.builtin.treesitter.highlight.enable = true
 -- }
 
 -- Additional Plugins
--- lvim.plugins = {
---     {
---       "folke/trouble.nvim",
---       cmd = "TroubleToggle",
---     },
--- }
+lvim.plugins = {
+  --     {
+  --       "folke/trouble.nvim",
+  --       cmd = "TroubleToggle",
+  --     },
+  {
+    "echasnovski/mini.map",
+    branch = "stable",
+    config = function()
+      local map = require('mini.map')
+      map.setup({
+        integrations = {
+          map.gen_integration.builtin_search(),
+          map.gen_integration.diagnostic({
+            error = 'DiagnosticFloatingError',
+            warn  = 'DiagnosticFloatingWarn',
+            info  = 'DiagnosticFloatingInfo',
+            hint  = 'DiagnosticFloatingHint',
+          }),
+        },
+        symbols = {
+          encode = map.gen_encode_symbols.dot('4x2'),
+        },
+        window = {
+          side = 'right',
+          width = 20, -- set to 1 for a pure scrollbar :)
+          winblend = 15,
+          show_integration_count = false,
+        },
+      })
+    end
+  },
+  { "tpope/vim-surround" },
+  { "MunifTanjim/exrc.nvim",
+    requires = { { "MunifTanjim/nui.nvim" } },
+    config = function()
+      require("exrc").setup({
+        files = {
+          ".nvimrc.lua",
+          ".nvimrc",
+          ".exrc.lua",
+          ".exrc",
+        },
+      })
+    end
+  },
+  { "lspcontainers/lspcontainers.nvim" }
+}
+
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {
@@ -208,6 +251,7 @@ lvim.builtin.treesitter.highlight.enable = true
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.wrap = true
+vim.o.clipboard = ""
 lvim.builtin.nvimtree.setup.update_cwd = false
 
 lvim.keys.insert_mode["<A-j>"] = false
