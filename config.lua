@@ -233,7 +233,23 @@ lvim.plugins = {
       })
     end
   },
-  { "lspcontainers/lspcontainers.nvim" }
+  { "lspcontainers/lspcontainers.nvim" },
+  {
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    ft = "markdown",
+    config = function()
+      vim.g.mkdp_auto_start = 1
+    end,
+  },
+  {
+    "aserowy/tmux.nvim",
+    config = function() require("tmux").setup({
+        copy_sync = { enable = false }
+      }
+      )
+    end
+  }
 }
 
 
