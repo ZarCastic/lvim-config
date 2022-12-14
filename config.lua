@@ -309,3 +309,20 @@ lvim.keys.visual_block_mode["<A-j>"] = false
 lvim.keys.visual_block_mode["<A-k>"] = false
 lvim.keys.visual_block_mode["J"] = false
 lvim.keys.visual_block_mode["K"] = false
+
+local dap = require('dap')
+dap.adapters.go = {
+  type = 'executable';
+  command = 'node';
+  args = { os.getenv('HOME') .. '/bin/vscode-go/dist/debugAdapter.js' };
+}
+dap.configurations.go = {
+  {
+    type = 'go';
+    name = 'Debug';
+    request = 'launch';
+    showLog = false;
+    program = "${file}";
+    dlvToolPath = vim.fn.exepath('dlv') -- Adjust to where delve is installed
+  },
+}
