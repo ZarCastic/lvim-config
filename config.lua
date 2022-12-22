@@ -28,19 +28,30 @@ lvim.keys.normal_mode["<leader><leader>"] = "<C-6>"
 lvim.builtin.which_key.mappings['p'] = {}
 -- remove search keybinding
 lvim.builtin.which_key.mappings['s'] = {}
+lvim.builtin.which_key.mappings['f'] = {}
 
 lvim.keys.normal_mode["<leader>y"] = '"+y'
 lvim.keys.normal_mode["<leader>y"] = '"+y'
 lvim.keys.normal_mode["<leader>p"] = '"+p'
 lvim.keys.normal_mode["<leader>P"] = '"+P'
+lvim.keys.visual_block_mode["<leader>y"] = '"+y'
+lvim.keys.visual_block_mode["<leader>y"] = '"+y'
+lvim.keys.visual_block_mode["<leader>p"] = '"+p'
+lvim.keys.visual_block_mode["<leader>P"] = '"+P'
+lvim.keys.visual_mode["<leader>y"] = '"+y'
+lvim.keys.visual_mode["<leader>y"] = '"+y'
+lvim.keys.visual_mode["<leader>p"] = '"+p'
+lvim.keys.visual_mode["<leader>P"] = '"+P'
 
 lvim.keys.normal_mode["<leader>sp"] = ":sp<cr>"
 lvim.keys.normal_mode["<leader>vs"] = ":vs<cr>"
 
-lvim.keys.normal_mode["<C-P>"] = "<cmd>Telescope find_files hidden=true<cr>"
-lvim.keys.normal_mode["<C-F>"] = "<cmd>Telescope live_grep<cr>"
-lvim.keys.normal_mode["<C-B>"] = "<cmd>Telescope buffers<cr>"
-lvim.keys.normal_mode["<C-A>"] = "<cmd>Telescope marks<cr>"
+lvim.keys.normal_mode["<leader>fa"] = "<cmd>Telescope marks initial_mode=insert<cr>"
+lvim.keys.normal_mode["<leader>fs"] = "<cmd>Telescope grep_string initial_mode=insert<cr>"
+lvim.keys.normal_mode["<leader>ff"] = "<cmd>Telescope find_files initial_mode=insert<cr>"
+lvim.keys.normal_mode["<leader>fo"] = "<cmd>Telescope oldfiles initial_mode=insert<cr>"
+lvim.keys.normal_mode["<leader>fb"] = "<cmd>Telescope buffers initial_mode=insert<cr>"
+lvim.keys.normal_mode["<leader>fg"] = "<cmd>Telescope live_grep initial_mode=insert<cr>"
 
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
