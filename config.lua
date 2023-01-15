@@ -233,8 +233,8 @@ lvim.plugins = {
       }
       )
     end
-  }
-  , { "radenling/vim-dispatch-neovim",
+  },
+  { "radenling/vim-dispatch-neovim",
     requires = { { "tpope/vim-dispatch" } } }
 }
 
