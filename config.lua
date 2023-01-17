@@ -84,15 +84,16 @@ lvim.keys.normal_mode["<leader>fg"] = "<cmd>Telescope live_grep initial_mode=ins
 
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
--- }
+lvim.builtin.which_key.mappings["t"] = {
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+  t = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+}
 
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
@@ -199,10 +200,10 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- Additional Plugins
 lvim.plugins = {
-  --     {
-  --       "folke/trouble.nvim",
-  --       cmd = "TroubleToggle",
-  --     },
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
   { "tpope/vim-surround" },
   { "MunifTanjim/exrc.nvim",
     requires = { { "MunifTanjim/nui.nvim" } },
@@ -283,6 +284,6 @@ dap.configurations.go = {
     request = 'launch';
     showLog = false;
     program = "${file}";
-    dlvToolPath = vim.fn.exepath('dlv') -- Adjust to where delve is installed
+    dlvToolPath = '/usr/bin/dlv' -- Adjust to where delve is installed
   },
 }
