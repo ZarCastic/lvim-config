@@ -85,14 +85,14 @@ lvim.keys.normal_mode["<leader>fg"] = "<cmd>Telescope live_grep initial_mode=ins
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-  t = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+    name = "+Trouble",
+    r = { "<cmd>Trouble lsp_references<cr>", "References" },
+    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+    t = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
 }
 
 -- TODO: User Config for predefined plugins
@@ -105,19 +105,19 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "c",
-  "cpp",
-  "javascript",
-  "json",
-  "lua",
-  "python",
-  "typescript",
-  "tsx",
-  "css",
-  "rust",
-  "java",
-  "yaml",
+    "bash",
+    "c",
+    "cpp",
+    "javascript",
+    "json",
+    "lua",
+    "python",
+    "typescript",
+    "tsx",
+    "css",
+    "rust",
+    "java",
+    "yaml",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -200,44 +200,53 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- Additional Plugins
 lvim.plugins = {
-  {
-    "folke/trouble.nvim",
-    cmd = "TroubleToggle",
-  },
-  { "tpope/vim-surround" },
-  { "MunifTanjim/exrc.nvim",
-    requires = { { "MunifTanjim/nui.nvim" } },
-    config = function()
-      require("exrc").setup({
-        files = {
-          ".nvimrc.lua",
-          ".nvimrc",
-          ".exrc.lua",
-          ".exrc",
-        },
-      })
-    end
-  },
-  { "lspcontainers/lspcontainers.nvim" },
-  {
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    ft = "markdown",
-    config = function()
-      vim.g.mkdp_auto_start = 1
-    end,
-  },
-  {
-    "aserowy/tmux.nvim",
-    config = function() require("tmux").setup({
-        copy_sync = { enable = false }
-      }
-      )
-    end
-  },
-  { "radenling/vim-dispatch-neovim",
-    requires = { { "tpope/vim-dispatch" } } },
-  { "catppuccin/nvim", as = "catppuccin" }
+    {
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+    },
+    { "tpope/vim-surround" },
+    { "MunifTanjim/exrc.nvim",
+        dependencies = { { "MunifTanjim/nui.nvim" } },
+        config = function()
+          require("exrc").setup({
+              files = {
+                  ".nvimrc.lua",
+                  ".nvimrc",
+                  ".exrc.lua",
+                  ".exrc",
+              },
+          })
+        end
+    },
+    { "lspcontainers/lspcontainers.nvim" },
+    {
+        "iamcco/markdown-preview.nvim",
+        build = "cd app && npm install",
+        ft = "markdown",
+        config = function()
+          vim.g.mkdp_auto_start = 1
+        end,
+    },
+    {
+        "aserowy/tmux.nvim",
+        config = function()
+          require("tmux").setup({
+              copy_sync = { enable = false }
+          }
+          )
+        end
+    },
+    { "radenling/vim-dispatch-neovim",
+        dependencies = { { "tpope/vim-dispatch" } } },
+    { "catppuccin/nvim", name = "catppuccin" },
+    {
+        'saecki/crates.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        version = "v0.3.0",
+        config = function()
+          require('crates').setup()
+        end,
+    }
 }
 
 
@@ -269,21 +278,21 @@ lvim.keys.normal_mode["<A-k>"] = false
 lvim.keys.visual_block_mode["<A-j>"] = false
 lvim.keys.visual_block_mode["<A-k>"] = false
 lvim.keys.visual_block_mode["J"] = false
-lvim.keys.visual_block_mode["K"] = false
+
 
 local dap = require('dap')
 dap.adapters.go = {
-  type = 'executable';
-  command = 'node';
-  args = { os.getenv('HOME') .. '/bin/vscode-go/dist/debugAdapter.js' };
+    type = 'executable',
+    command = 'node',
+    args = { os.getenv('HOME') .. '/bin/vscode-go/dist/debugAdapter.js' },
 }
 dap.configurations.go = {
-  {
-    type = 'go';
-    name = 'Debug';
-    request = 'launch';
-    showLog = false;
-    program = "${file}";
-    dlvToolPath = '/usr/bin/dlv' -- Adjust to where delve is installed
-  },
+    {
+        type = 'go',
+        name = 'Debug',
+        request = 'launch',
+        showLog = false,
+        program = "${file}",
+        dlvToolPath = '/usr/bin/dlv' -- Adjust to where delve is installed
+    },
 }
