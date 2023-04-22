@@ -53,6 +53,36 @@ lvim.keys.normal_mode["<leader>fo"] = "<cmd>Telescope oldfiles initial_mode=inse
 lvim.keys.normal_mode["<leader>fb"] = "<cmd>Telescope buffers initial_mode=insert<cr>"
 lvim.keys.normal_mode["<leader>fg"] = "<cmd>Telescope live_grep initial_mode=insert<cr>"
 
+-- zettelkasten 
+lvim.keys.normal_mode["<leader>z"] = "<cmd>Telekasten panel<CR>"
+
+-- Most used functions
+lvim.keys.normal_mode["<leader>zf"] = ":lua require('telekasten').find_notes()<CR>"
+lvim.keys.normal_mode["<leader>zd"] = ":lua require('telekasten').find_daily_notes()<CR>"
+lvim.keys.normal_mode["<leader>zg"] = ":lua require('telekasten').search_notes()<CR>"
+lvim.keys.normal_mode["<leader>zz"] = ":lua require('telekasten').follow_link()<CR>"
+lvim.keys.normal_mode["<leader>zT"] = ":lua require('telekasten').goto_today()<CR>"
+lvim.keys.normal_mode["<leader>zW"] = ":lua require('telekasten').goto_thisweek()<CR>"
+lvim.keys.normal_mode["<leader>zw"] = ":lua require('telekasten').find_weekly_notes()<CR>"
+lvim.keys.normal_mode["<leader>zn"] = ":lua require('telekasten').new_note()<CR>"
+lvim.keys.normal_mode["<leader>zN"] = ":lua require('telekasten').new_templated_note()<CR>"
+lvim.keys.normal_mode["<leader>zy"] = ":lua require('telekasten').yank_notelink()<CR>"
+lvim.keys.normal_mode["<leader>zc"] = ":lua require('telekasten').show_calendar()<CR>"
+lvim.keys.normal_mode["<leader>zC"] = ":CalendarT<CR>"
+lvim.keys.normal_mode["<leader>zi"] = ":lua require('telekasten').paste_img_and_link()<CR>"
+lvim.keys.normal_mode["<leader>zt"] = ":lua require('telekasten').toggle_todo()<CR>"
+lvim.keys.normal_mode["<leader>zb"] = ":lua require('telekasten').show_backlinks()<CR>"
+lvim.keys.normal_mode["<leader>zF"] = ":lua require('telekasten').find_friends()<CR>"
+lvim.keys.normal_mode["<leader>zI"] = ":lua require('telekasten').insert_img_link({ i=true })<CR>"
+lvim.keys.normal_mode["<leader>zp"] = ":lua require('telekasten').preview_img()<CR>"
+lvim.keys.normal_mode["<leader>zm"] = ":lua require('telekasten').browse_media()<CR>"
+lvim.keys.normal_mode["<leader>za"] = ":lua require('telekasten').show_tags()<CR>"
+lvim.keys.normal_mode["<leader>#"] = ":lua require('telekasten').show_tags()<CR>"
+lvim.keys.normal_mode["<leader>zr"] = ":lua require('telekasten').rename_note()<CR>"
+
+-- Call insert link automatically when we start typing a link
+lvim.keys.insert_mode["[["] = "<cmd>Telekasten insert_link<CR>"
+
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
 -- unmap a default keymapping
@@ -245,6 +275,17 @@ lvim.plugins = {
         version = "v0.3.0",
         config = function()
           require('crates').setup()
+        end,
+    },
+    {
+        'renerocksai/telekasten.nvim',
+        dependencies = { 'nvim-telescope/telescope.nvim', 'renerocksai/calendar-vim' },
+        config = function()
+          require('telekasten').setup({
+              home = vim.fn.expand('~/zettelkasten'),
+              template_new_daily = vim.fn.expand("~/zettelkasten/templates/daily.md"), 
+              template_new_weekly = vim.fn.expand("~/zettelkasten/templates/weekly.md")
+          })
         end,
     }
 }

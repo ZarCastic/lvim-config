@@ -1,0 +1,10 @@
+---
+title: {{hdate}}
+--- 
+
+# Journal
+
+---
+
+# Agenda 
+
