@@ -283,13 +283,32 @@ lvim.plugins = {
         config = function()
           require('telekasten').setup({
               home = vim.fn.expand('~/zettelkasten'),
-              template_new_daily = vim.fn.expand("~/zettelkasten/templates/daily.md"), 
+              template_new_daily = vim.fn.expand("~/zettelkasten/templates/daily.md"),
               template_new_weekly = vim.fn.expand("~/zettelkasten/templates/weekly.md")
           })
         end,
+    },
+    {
+      "nvim-neorg/neorg",
+      build = ":Neorg sync-parsers",
+      dependencies = { { "nvim-lua/plenary.nvim" } },
     }
 }
 
+require('neorg').setup {
+  load = {
+    ["core.defaults"] = {},       -- Loads default behaviour
+    ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+    ["core.norg.dirman"] = {      -- Manages Neorg workspaces
+      config = {
+        workspaces = {
+          notes = "~/notes",
+        },
+        default_workspace = "notes"
+      },
+    },
+  },
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {
