@@ -46,14 +46,19 @@ lvim.keys.visual_mode["<leader>P"] = '"+P'
 lvim.keys.normal_mode["<leader>sp"] = ":sp<cr>"
 lvim.keys.normal_mode["<leader>vs"] = ":vs<cr>"
 
-lvim.keys.normal_mode["<leader>fa"] = "<cmd>Telescope marks initial_mode=insert<cr>"
-lvim.keys.normal_mode["<leader>fs"] = "<cmd>Telescope grep_string initial_mode=insert<cr>"
-lvim.keys.normal_mode["<leader>ff"] = "<cmd>Telescope find_files initial_mode=insert<cr>"
-lvim.keys.normal_mode["<leader>fo"] = "<cmd>Telescope oldfiles initial_mode=insert<cr>"
-lvim.keys.normal_mode["<leader>fb"] = "<cmd>Telescope buffers initial_mode=insert<cr>"
-lvim.keys.normal_mode["<leader>fg"] = "<cmd>Telescope live_grep initial_mode=insert<cr>"
+lvim.builtin.which_key.mappings["f"] = {
+  name = "+Telescope",
+  a = { "<cmd>Telescope marks initial_mode=insert<cr>", "Marks" },
+  s = { "<cmd>Telescope grep_string initial_mode=insert<cr>", "String Under Coursor" },
+  f = { "<cmd>Telescope find_files initial_mode=insert<cr>", "Files" },
+  o = { "<cmd>Telescope oldfiles initial_mode=insert<cr>", "Recent" },
+  b = { "<cmd>Telescope buffers initial_mode=insert<cr>", "Buffers" },
+  g = { "<cmd>Telescope live_grep initial_mode=insert<cr>", "Grep" },
+  p = { "<cmd>Telescope projects<cr>", "Projects" },
+  t = { "<cmd>TodoTelescope<cr>", "Todos" }
+}
 
--- zettelkasten 
+-- zettelkasten
 lvim.keys.normal_mode["<leader>z"] = "<cmd>Telekasten panel<CR>"
 
 -- Most used functions
@@ -79,9 +84,8 @@ lvim.keys.normal_mode["<leader>zm"] = ":lua require('telekasten').browse_media()
 lvim.keys.normal_mode["<leader>za"] = ":lua require('telekasten').show_tags()<CR>"
 lvim.keys.normal_mode["<leader>#"] = ":lua require('telekasten').show_tags()<CR>"
 lvim.keys.normal_mode["<leader>zr"] = ":lua require('telekasten').rename_note()<CR>"
+lvim.keys.normal_mode["<leader>zl"] = "<cmd>Telekasten insert_link<CR>"
 
--- Call insert link automatically when we start typing a link
-lvim.keys.insert_mode["[["] = "<cmd>Telekasten insert_link<CR>"
 
 -- lvim.keys.normal_mode["<S-l>"] = ":BufferLineCycleNext<CR>"
 -- lvim.keys.normal_mode["<S-h>"] = ":BufferLineCyclePrev<CR>"
@@ -115,14 +119,15 @@ lvim.keys.insert_mode["[["] = "<cmd>Telekasten insert_link<CR>"
 -- Use which-key to add extra bindings with the leader-key prefix
 -- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
-    name = "+Trouble",
-    r = { "<cmd>Trouble lsp_references<cr>", "References" },
-    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
-    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    t = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+  name = "+Trouble",
+  r = { "<cmd>Trouble lsp_references<cr>", "References" },
+  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+  d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+  w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+  t = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+  a = { "<cmd>TodoTrouble<cr>", "Todo" },
 }
 
 -- TODO: User Config for predefined plugins
@@ -135,19 +140,19 @@ lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-    "bash",
-    "c",
-    "cpp",
-    "javascript",
-    "json",
-    "lua",
-    "python",
-    "typescript",
-    "tsx",
-    "css",
-    "rust",
-    "java",
-    "yaml",
+  "bash",
+  "c",
+  "cpp",
+  "javascript",
+  "json",
+  "lua",
+  "python",
+  "typescript",
+  "tsx",
+  "css",
+  "rust",
+  "java",
+  "yaml",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -195,20 +200,20 @@ lvim.builtin.treesitter.highlight.enable = true
 -- end
 
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
--- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup {
---   { command = "black", filetypes = { "python" } },
---   { command = "isort", filetypes = { "python" } },
---   {
---     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
---     command = "prettier",
---     ---@usage arguments to pass to the formatter
---     -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
---     extra_args = { "--print-with", "100" },
---     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
---     filetypes = { "typescript", "typescriptreact" },
---   },
--- }
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { command = "black", filetypes = { "python" } },
+  { command = "isort", filetypes = { "python" } },
+  {
+    -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "prettier",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    extra_args = { "--print-with", "100" },
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "typescript", "typescriptreact", "vue" },
+  },
+}
 
 -- -- set additional linters
 -- local linters = require "lvim.lsp.null-ls.linters"
@@ -230,69 +235,68 @@ lvim.builtin.treesitter.highlight.enable = true
 
 -- Additional Plugins
 lvim.plugins = {
-    {
-        "folke/trouble.nvim",
-        cmd = "TroubleToggle",
-    },
-    { "tpope/vim-surround" },
-    { "MunifTanjim/exrc.nvim",
-        dependencies = { { "MunifTanjim/nui.nvim" } },
-        config = function()
-          require("exrc").setup({
-              files = {
-                  ".nvimrc.lua",
-                  ".nvimrc",
-                  ".exrc.lua",
-                  ".exrc",
-              },
-          })
-        end
-    },
-    { "lspcontainers/lspcontainers.nvim" },
-    {
-        "iamcco/markdown-preview.nvim",
-        build = "cd app && npm install",
-        ft = "markdown",
-        config = function()
-          vim.g.mkdp_auto_start = 1
-        end,
-    },
-    {
-        "aserowy/tmux.nvim",
-        config = function()
-          require("tmux").setup({
-              copy_sync = { enable = false }
-          }
-          )
-        end
-    },
-    { "radenling/vim-dispatch-neovim",
-        dependencies = { { "tpope/vim-dispatch" } } },
-    { "catppuccin/nvim", name = "catppuccin" },
-    {
-        'saecki/crates.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        version = "v0.3.0",
-        config = function()
-          require('crates').setup()
-        end,
-    },
-    {
-        'renerocksai/telekasten.nvim',
-        dependencies = { 'nvim-telescope/telescope.nvim', 'renerocksai/calendar-vim' },
-        config = function()
-          require('telekasten').setup({
-              home = vim.fn.expand('~/zettelkasten'),
-              template_new_daily = vim.fn.expand("~/zettelkasten/templates/daily.md"),
-              template_new_weekly = vim.fn.expand("~/zettelkasten/templates/weekly.md")
-          })
-        end,
-    },
-    {
-      "nvim-neorg/neorg",
-      build = ":Neorg sync-parsers",
-      dependencies = { { "nvim-lua/plenary.nvim" } },
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
     }
+  },
+  { "tpope/vim-surround" },
+  {
+    "MunifTanjim/exrc.nvim",
+    dependencies = { { "MunifTanjim/nui.nvim" } },
+    config = function()
+      require("exrc").setup({
+        files = {
+          ".nvimrc.lua",
+          ".nvimrc",
+          ".exrc.lua",
+          ".exrc",
+        },
+      })
+    end
+  },
+  { "lspcontainers/lspcontainers.nvim" },
+  {
+    "iamcco/markdown-preview.nvim",
+    build = "cd app && npm install",
+    ft = "markdown",
+    config = function()
+      vim.g.mkdp_auto_start = 1
+    end,
+  },
+  {
+    "radenling/vim-dispatch-neovim",
+    dependencies = { { "tpope/vim-dispatch" } }
+  },
+  { "catppuccin/nvim",       name = "catppuccin" },
+  { "EdenEast/nightfox.nvim" },
+  {
+    'saecki/crates.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    version = "v0.3.0",
+    config = function()
+      require('crates').setup()
+    end,
+  },
+  {
+    'renerocksai/telekasten.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'renerocksai/calendar-vim' },
+    config = function()
+      require('telekasten').setup({
+        home = vim.fn.expand('~/zettelkasten'),
+        template_new_daily = vim.fn.expand("~/zettelkasten/templates/daily.md"),
+        template_new_weekly = vim.fn.expand("~/zettelkasten/templates/weekly.md")
+      })
+    end,
+  }
 }
 
 require('neorg').setup {
@@ -309,7 +313,6 @@ require('neorg').setup {
     },
   },
 }
-
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --   pattern = { "*.json", "*.jsonc" },
@@ -330,6 +333,12 @@ vim.o.relativenumber = true
 vim.o.wrap = true
 vim.o.clipboard = ""
 lvim.builtin.nvimtree.setup.update_cwd = false
+vim.o.foldcolumn = '1'
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
+lvim.builtin.project.patterns = { ">Projects", ".git" }
 
 lvim.keys.insert_mode["<A-j>"] = false
 lvim.keys.insert_mode["<A-k>"] = false
@@ -340,19 +349,39 @@ lvim.keys.visual_block_mode["<A-k>"] = false
 lvim.keys.visual_block_mode["J"] = false
 
 
+-- lsp stuff
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true
+}
+local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
+for _, ls in ipairs(language_servers) do
+  require('lspconfig')[ls].setup({
+    capabilities = capabilities
+    -- you can add other fields for setting up lsp server in this table
+  })
+end
+
 local dap = require('dap')
 dap.adapters.go = {
-    type = 'executable',
-    command = 'node',
-    args = { os.getenv('HOME') .. '/bin/vscode-go/dist/debugAdapter.js' },
+  type = 'executable',
+  command = 'node',
+  args = { os.getenv('HOME') .. '/bin/vscode-go/dist/debugAdapter.js' },
 }
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/home/tobi/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb', -- adjust as needed, must be absolute path
+  name = 'lldb'
+}
+
 dap.configurations.go = {
-    {
-        type = 'go',
-        name = 'Debug',
-        request = 'launch',
-        showLog = false,
-        program = "${file}",
-        dlvToolPath = '/usr/bin/dlv' -- Adjust to where delve is installed
-    },
+  {
+    type = 'go',
+    name = 'Debug',
+    request = 'launch',
+    showLog = false,
+    program = "${file}",
+    dlvToolPath = '/usr/bin/dlv' -- Adjust to where delve is installed
+  },
 }
